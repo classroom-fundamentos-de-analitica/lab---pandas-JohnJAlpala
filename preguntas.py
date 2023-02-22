@@ -22,7 +22,8 @@ def pregunta_01():
     40
 
     """
-    return
+    rows = len(tb10)
+    return rows
 
 
 def pregunta_02():
@@ -33,7 +34,8 @@ def pregunta_02():
     4
 
     """
-    return
+    columns = len(tb10.columns)
+    return columns
 
 
 def pregunta_03():
