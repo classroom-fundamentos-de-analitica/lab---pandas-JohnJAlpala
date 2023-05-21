@@ -24,8 +24,7 @@ def pregunta_01():
     40
 
     """
-    rows = len(tbl0)
-    return rows
+    return len(tbl0)
 
 
 def pregunta_02():
@@ -36,8 +35,7 @@ def pregunta_02():
     4
 
     """
-    columns = len(tbl0.columns)
-    return columns
+    return len(tbl0.columns)
 
 
 def pregunta_03():
@@ -54,8 +52,7 @@ def pregunta_03():
     Name: _c1, dtype: int64
 
     """
-    columna_c1 = tbl0['_c1'].value_counts().sort_index()
-    return columna_c1
+    return tbl0['_c1'].value_counts().sort_index()
 
 
 def pregunta_04():
