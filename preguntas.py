@@ -97,8 +97,8 @@ def pregunta_06():
     ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
     """
-    unicos = tbl1['_c4'].unique()
-    unicos = list(unicos)
+    lista = tbl1['_c4'].unique()
+    unicos = list(lista)
     unicos.sort()
     return [letra.upper() for letra in unicos]
 
@@ -170,13 +170,19 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-    col1 = list(tbl0['_c1'].unique())
-    col1.sort()
-    cant = tbl0.groupby('_c1')['_c2'].apply(lambda x: ':'.join(str(e) for e in sorted(x)))
-    x = pd.DataFrame({"_c2": list(cant.array)}, index=pd.Series(col1, name="_c1"),)
+    valores = tbl0[['_c1', '_c2']].groupby(['_c1'])['_c2'].apply(list).tolist()
+    c2 = []
 
-    return x
+    for letra in valores:
+        texto = ''
+        for valor in sorted(letra):
+            texto += f'{valor}:'
+        
+        c2.append(texto[:-1])
 
+    return pd.DataFrame({
+        '_c1': c2
+    }, index = pd.Series(['A', 'B', 'C', 'D', 'E'], name='_c0'))
 
 def pregunta_11():
     """
@@ -197,8 +203,8 @@ def pregunta_11():
     cant = tbl1.groupby('_c0')['_c4'].apply(lambda x: ','.join(str(e) for e in sorted(x)))
     col0 = list(tbl1['_c0'].unique())
     col0.sort()
-    x = pd.DataFrame({'_c0': col0, "_c4": list(cant.array)})
-    return x
+    data = pd.DataFrame({'_c0': col0, "_c4": list(cant.array)})
+    return data
 
 
 def pregunta_12():
@@ -222,8 +228,8 @@ def pregunta_12():
     col0 = sorted(list(tbl2['_c0'].unique()))
     col5 = tbl2.groupby('_c0')['_c5'].apply(lambda x: ','.join(e for e in sorted(x)))
 
-    respuesta = pd.DataFrame({'_c0': col0, "_c5": list(col5.array)})
-    return respuesta
+    data = pd.DataFrame({'_c0': col0, "_c5": list(col5.array)})
+    return data
 
 def pregunta_13():
     """
@@ -239,6 +245,7 @@ def pregunta_13():
     E    275
     Name: _c5b, dtype: int64
     """
-    fusion = pd.merge(tbl0, tbl2, on='_c0')
-    cant = fusion.groupby('_c1')['_c5b'].sum()
-    return cant
+    merged_df = tbl0.merge(tbl2, left_on='_c0', right_on='_c0')
+    merged_df['_c5b'] = merged_df['_c5b'].astype(int)
+    result = merged_df.groupby('_c1')['_c5b'].sum()
+    return result
