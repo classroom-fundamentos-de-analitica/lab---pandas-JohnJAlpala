@@ -170,7 +170,7 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-     col1 = list(tbl0['_c1'].unique())
+    col1 = list(tbl0['_c1'].unique())
     col1.sort()
     cant = tbl0.groupby('_c1')['_c2'].apply(lambda x: ':'.join(str(e) for e in sorted(x)))
     data = pd.DataFrame({"_c2": list(cant.array)}, index=pd.Series(col1, name="_c1"),)
