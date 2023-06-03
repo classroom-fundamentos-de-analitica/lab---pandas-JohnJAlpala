@@ -199,6 +199,7 @@ def pregunta_11():
     37   37  a,c,e,f
     38   38      d,e
     39   39    a,d,f
+    
     """
     cant = tbl1.groupby('_c0')['_c4'].apply(lambda x: ','.join(str(e) for e in sorted(x)))
     col0 = list(tbl1['_c0'].unique())
