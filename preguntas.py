@@ -180,9 +180,7 @@ def pregunta_10():
         
         c2.append(texto[:-1])
 
-    return pd.DataFrame({
-        '_c1': c2
-    }, index = pd.Series(['A', 'B', 'C', 'D', 'E'], name='_c0'))
+    return pd.DataFrame({'_c1': c2}, index = pd.Series(['A', 'B', 'C', 'D', 'E'], name='_c0'))
 
 def pregunta_11():
     """
